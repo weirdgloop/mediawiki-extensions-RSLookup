@@ -1,0 +1,38 @@
+{
+	"name": "RSLookup",
+	"version": "1.0.0",
+	"author": [
+		"[https://twitter.com/jaydenkieran Jayden Bailey]",
+		"..."
+	],
+	"url": "https://weirdgloop.org",
+	"descriptionmsg": "rslookup-desc",
+	"license-name": "GPL-2.0+",
+	"type": "semantic",
+	"MessagesDirs": {
+		"RSLookupMessages": [
+			"i18n/rslookup"
+		]
+	},
+	"requires": {
+		"MediaWiki": ">= 1.30.0"
+  },
+	"AutoloadClasses": {
+		"SpecialLookup": "SpecialLookup_body.php"
+  },
+	"SpecialPages": {
+		"Lookup": "SpecialLookup"
+	},
+	"config": {
+		"_prefix": "wgl",
+		"SendDetailsWithContactPage": true,
+		"EnableLoadingDarkmode": true,
+		"EnableSearchboxMetadata": true,
+		"ProtectSiteInterface": true,
+		"RequireLicensesToUpload": true,
+		"EnableMessageOverrides": true,
+		"AddFooterLinks": true,
+		"EnableLoadingReadermode": true
+	},
+	"manifest_version": 1
+}
