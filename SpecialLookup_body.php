@@ -14,9 +14,9 @@ class SpecialLookup extends SpecialPage {
 		$output = $this->getOutput();
 		$this->setHeaders();
 
-    $type = $request->getText( 'type' );
-    $id = $request->getText( 'id' );
-    $name = $request->getText( 'name' );
+    $type = $request->getText( 'type', '' );
+    $id = $request->getText( 'id', '' );
+    $name = $request->getText( 'name', '' );
 
     if ( empty( $name ) ) {
       // Redirect to the main page if there's no name
