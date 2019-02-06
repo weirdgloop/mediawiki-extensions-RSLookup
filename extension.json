@@ -23,16 +23,5 @@
 	"SpecialPages": {
 		"Lookup": "SpecialLookup"
 	},
-	"config": {
-		"_prefix": "wgl",
-		"SendDetailsWithContactPage": true,
-		"EnableLoadingDarkmode": true,
-		"EnableSearchboxMetadata": true,
-		"ProtectSiteInterface": true,
-		"RequireLicensesToUpload": true,
-		"EnableMessageOverrides": true,
-		"AddFooterLinks": true,
-		"EnableLoadingReadermode": true
-	},
 	"manifest_version": 1
 }
