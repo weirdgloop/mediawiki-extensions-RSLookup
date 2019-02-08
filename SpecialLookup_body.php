@@ -42,13 +42,20 @@ class SpecialLookup extends SpecialPage {
         // No results from SMW, check if name provided is a wiki page
         $this->backupPlan( $name );
       } else {
+        if ( count( $result ) > 1 ) {
+          // More than one result, log this
+          wfDebugLog( 'rslookup', "Query returned more than one result. [{$name}, {$type}, {$id}, prop={$prop}]" );
+        }
+
         $this->handleSMWResult( $result );
       }
     }
   }
 
   protected function handleSMWResult( $result ) {
-    $r = reset($result['query']['results']);
+    $results = $result['query']['results'];
+
+    $r = reset($results);
 
     // TODO: handle version anchor
     // $r['printouts']['Version anchor']
