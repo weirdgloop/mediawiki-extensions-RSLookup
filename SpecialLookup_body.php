@@ -56,12 +56,24 @@ class SpecialLookup extends SpecialPage {
     $results = $result['query']['results'];
 
     $r = reset($results);
+    $url = $r['fullurl'];
 
-    // TODO: handle version anchor
-    // $r['printouts']['Version anchor']
+    if ( !empty( $r['printouts']['Version anchor'] ) ) {
+      // Get everything before the # in the URL already
+      $split = explode( '#', $url );
+      $url = $split[0];
 
-    // Redirect to the target page
-    $this->getOutput()->redirect($r['fullurl']);
+      if ( array_key_exists( 'fulltext', $r['printouts']['Version anchor'][0] ) ) {
+        // First item in Version anchor array has fulltext key, append the value
+        $url .= '#' . $r['printouts']['Version anchor'][0]['fulltext'];
+      }
+    }
+
+    // Encode the URL
+    $url = str_replace(' ', '_', $url); // Replace spaces with _
+
+    // Redirect to the target URL
+    $this->getOutput()->redirect($url);
   }
 
   protected function backupPlan( $name ) {
@@ -95,6 +107,7 @@ class SpecialLookup extends SpecialPage {
       )
     );
     $api = new ApiMain( $params );
+    $api->setCacheMaxAge(600); // cache for 10 minutes
     $api->execute();
     $result = $api->getResult()->getResultData();
     return $result;
