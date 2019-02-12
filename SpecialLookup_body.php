@@ -75,6 +75,9 @@ class SpecialLookup extends SpecialPage {
       if ( array_key_exists( 'fulltext', $r['printouts']['Version anchor'][0] ) ) {
         // First item in Version anchor array has fulltext key, append the value
         $url .= '#' . $r['printouts']['Version anchor'][0]['fulltext'];
+      } else {
+        // Something weird happened, just add whatever the first item is
+        $url .= '#' . $r['printouts']['Version anchor'][0];
       }
     }
 
