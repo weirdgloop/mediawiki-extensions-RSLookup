@@ -1,8 +1,23 @@
 <?php
 
 class SpecialLookup extends SpecialPage {
+  /**
+   * @var string
+   */
+  protected $lookupType;
+
+  /**
+   * @var int
+   */
+  protected $lookupId;
+
+  /**
+   * @var string
+   */
+  protected $lookupName;
+
 	function __construct() {
-		parent::__construct( 'Lookup', '', false );
+    parent::__construct( 'Lookup', '', false );
 	}
 
 	function execute( $par ) {
@@ -10,18 +25,18 @@ class SpecialLookup extends SpecialPage {
 		$output = $this->getOutput();
 		$this->setHeaders();
 
-    $type = $request->getText( 'type', '' );
-    $id = $request->getText( 'id', '' );
-    $name = $request->getText( 'name', '' );
+    $this->lookupType = $request->getText( 'type', '' );
+    $this->lookupId = $request->getText( 'id', '' );
+    $this->lookupName = $request->getText( 'name', '' );
 
-    if ( empty( $id ) ) {
+    if ( empty( $this->lookupId ) ) {
       // No ID given
-      $this->backupPlan( $name );
+      $this->backupPlan();
     }
 
     $prop = '';
 
-    switch ( $type ) {
+    switch ( $this->lookupType ) {
       case 'item':
         $prop = 'Item ID';
         break;
@@ -35,16 +50,16 @@ class SpecialLookup extends SpecialPage {
 
     if ( empty( $prop ) ) {
       // Not a recognised type
-      $this->backupPlan( $name );
+      $this->backupPlan();
     } else {
-      $result = $this->makeSMWQuery( $prop, $id );
+      $result = $this->makeSMWQuery( $prop, $this->lookupId );
       if ( !$result['query']['results'] ) {
         // No results from SMW, check if name provided is a wiki page
-        $this->backupPlan( $name );
+        $this->backupPlan();
       } else {
         if ( count( $result ) > 1 ) {
           // More than one result, log this
-          wfDebugLog( 'rslookup', "Query returned more than one result. [{$name}, {$type}, {$id}, prop={$prop}]" );
+          wfDebugLog( 'rslookup', "Query returned more than one result. [{$this->lookupName}, {$this->lookupType}, {$this->lookupId}, prop={$prop}]" );
         }
 
         $this->handleSMWResult( $result );
@@ -76,8 +91,9 @@ class SpecialLookup extends SpecialPage {
     $this->getOutput()->redirect($url);
   }
 
-  protected function backupPlan( $name ) {
+  protected function backupPlan() {
     $output = $this->getOutput();
+    $name = $this->lookupName;
     if ( empty( $name ) ) {
       // Redirect to the main page if there's no name
       $mp = Title::newMainPage();
