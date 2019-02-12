@@ -1,20 +1,13 @@
 <?php
 
 class SpecialLookup extends SpecialPage {
-  /**
-   * @var string
-   */
   protected $lookupType;
 
-  /**
-   * @var int
-   */
   protected $lookupId;
 
-  /**
-   * @var string
-   */
   protected $lookupName;
+
+  protected $lookupDry;
 
 	function __construct() {
     parent::__construct( 'Lookup', '', false );
@@ -28,6 +21,7 @@ class SpecialLookup extends SpecialPage {
     $this->lookupType = $request->getText( 'type', '' );
     $this->lookupId = $request->getText( 'id', '' );
     $this->lookupName = $request->getText( 'name', '' );
+    $this->lookupDry = $request->getBool( 'dry', false );
 
     if ( empty( $this->lookupId ) ) {
       // No ID given
@@ -88,7 +82,21 @@ class SpecialLookup extends SpecialPage {
     $url = str_replace(' ', '_', $url); // Replace spaces with _
 
     // Redirect to the target URL
-    $this->getOutput()->redirect($url);
+    if ( $this->lookupDry ) {
+      // If this is a dry run, output what the result would have been
+      $this->showDryRunResult( "URL to redirect to: {$url}\n\nSMW query results:\n\n" . print_r($results, true));
+    } else {
+      $this->getOutput()->redirect($url);
+    }
+  }
+
+  protected function showDryRunResult( $text ) {
+    $this->getOutput()->addWikiText(
+      "This page will display the '''expected output''' of your query."
+    . "\n\n==Output==\n\n<pre>\nRequested type: {$this->lookupType}\n"
+    . "Requested name: {$this->lookupName}\n"
+    . "Requested ID: {$this->lookupId}\n\n{$text}\n</pre>");
+    return true;
   }
 
   protected function backupPlan() {
@@ -98,19 +106,22 @@ class SpecialLookup extends SpecialPage {
       // Redirect to the main page if there's no name
       $mp = Title::newMainPage();
       $url = $mp->getFullURL();
-      $output->redirect( $url );
     } else {
       $title = Title::newFromText( $name );
       if ( $title->exists() ) {
         // Page exists, let's redirect to it
         $url = $title->getFullURL();
-        $output->redirect( $url );
       } else {
         // Page doesn't exist, let's redirect to the search page
         $search = Title::newFromText( 'Special:Search' );
         $url = $search->getFullURL( 'search=' . $name );
-        $output->redirect( $url );
       }
+    }
+    if ( $this->lookupDry ) {
+      // If this is a dry run, output what the result would have been
+      $this->showDryRunResult( "URL to redirect to: {$url}" );
+    } else {
+      $output->redirect( $url );
     }
   }
   
