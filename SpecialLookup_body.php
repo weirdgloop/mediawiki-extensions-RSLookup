@@ -51,7 +51,7 @@ class SpecialLookup extends SpecialPage {
         // No results from SMW, check if name provided is a wiki page
         $this->backupPlan();
       } else {
-        if ( count( $result ) > 1 ) {
+        if ( count( $result['query']['results'] ) > 1 ) {
           // More than one result, log this
           wfDebugLog( 'rslookup', "Query returned more than one result. [{$this->lookupName}, {$this->lookupType}, {$this->lookupId}, prop={$prop}]" );
         }
