@@ -20,7 +20,7 @@ class SpecialLookup extends SpecialPage {
 
     $this->lookupType = $request->getText( 'type', '' );
     $this->lookupId = $request->getText( 'id', '' );
-    $this->lookupName = $request->getText( 'name', '' );
+    $this->lookupName = htmlspecialchars( $request->getText( 'name', '' ) );
     $this->lookupDry = $request->getBool( 'dry', false );
 
     if ( empty( $this->lookupId ) ) {
@@ -112,7 +112,7 @@ class SpecialLookup extends SpecialPage {
       $url = $mp->getFullURL();
     } else {
       $title = Title::newFromText( $name );
-      if ( $title->exists() ) {
+      if ( ( $title !== null ) && $title->exists() ) {
         // Page exists, let's redirect to it
         $url = $title->getFullURL();
       } else {
