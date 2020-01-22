@@ -72,13 +72,14 @@ class SpecialLookup extends SpecialPage {
       // Get everything before the # in the URL already
       $split = explode( '#', $url );
       $url = $split[0];
+      $anchor = $r['printouts']['Version anchor'][0];
 
-      if ( array_key_exists( 'fulltext', $r['printouts']['Version anchor'][0] ) ) {
+      if ( is_array( $anchor ) && array_key_exists( 'fulltext', $anchor ) ) {
         // First item in Version anchor array has fulltext key, append the value
-        $url .= '#' . $r['printouts']['Version anchor'][0]['fulltext'];
+        $url .= '#' . $anchor['fulltext'];
       } else {
         // Something weird happened, just add whatever the first item is
-        $url .= '#' . $r['printouts']['Version anchor'][0];
+        $url .= '#' . $anchor;
       }
     }
 
