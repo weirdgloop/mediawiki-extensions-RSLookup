@@ -1,27 +1,35 @@
 {
-	"name": "RSLookup",
-	"version": "1.0.0",
-	"author": [
-		"[https://twitter.com/jaydenkieran Jayden Bailey]",
-		"..."
-	],
-	"url": "https://weirdgloop.org",
-	"descriptionmsg": "rslookup-desc",
-	"license-name": "GPL-2.0+",
-	"type": "semantic",
-	"MessagesDirs": {
-		"RSLookupMessages": [
-			"i18n/rslookup"
-		]
-	},
-	"requires": {
-		"MediaWiki": ">= 1.30.0"
+  "name": "RSLookup",
+  "version": "1.1.0",
+  "author": [
+    "[https://github.com/jayktaylor Jayden Bailey]",
+    "..."
+  ],
+  "url": "https://weirdgloop.org",
+  "descriptionmsg": "rslookup-desc",
+  "license-name": "GPL-2.0+",
+  "type": "semantic",
+  "MessagesDirs": {
+    "RSLookupMessages": [
+      "i18n/rslookup"
+    ]
   },
-	"AutoloadClasses": {
-		"SpecialLookup": "SpecialLookup_body.php"
+  "requires": {
+    "MediaWiki": ">= 1.30.0"
   },
-	"SpecialPages": {
-		"Lookup": "SpecialLookup"
-	},
-	"manifest_version": 1
+  "config": {
+    "RSLookupTypes": {
+      "item": "Item ID",
+      "npc": "NPC ID",
+      "object": "Object ID",
+      "_merge_strategy": "array_plus"
+    }
+  },
+  "AutoloadClasses": {
+    "SpecialLookup": "SpecialLookup_body.php"
+  },
+  "SpecialPages": {
+    "Lookup": "SpecialLookup"
+  },
+  "manifest_version": 1
 }

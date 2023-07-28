@@ -8,6 +8,16 @@ The RSLookup extension helps create integrations between the wiki and RuneScape 
 
 * [Semantic MediaWiki](https://www.semantic-mediawiki.org/wiki/Semantic_MediaWiki)
 
+**LocalSettings.php:**
+
+```php
+$wgRSLookupTypes = [
+    'item' => 'Item ID',
+    'npc' => 'NPC ID',
+    'object' => 'Object ID'
+];
+```
+
 ### Usage
 
 > This information is also found on the [Old School RuneScape Wiki](https://oldschool.runescape.wiki/w/RuneScape:Lookup)
@@ -16,7 +26,7 @@ The RSLookup extension helps create integrations between the wiki and RuneScape 
 
 #### Parameters
 
-* `type` (string) - one of `item`, `npc`, `object` - the type of entity to lookup
+* `type` (string) - one of `$wgRSLookupTypes` keys - the type of entity to lookup
 * `id` (int) - the ID of the entity to lookup
 * `name` (string) - the page that will be shown/searched if the ID query returns no results
 
