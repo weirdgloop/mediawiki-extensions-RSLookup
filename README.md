@@ -6,15 +6,25 @@ The RSLookup extension helps create integrations between the wiki and RuneScape 
 
 ### Requirements
 
-* [Semantic MediaWiki](https://www.semantic-mediawiki.org/wiki/Semantic_MediaWiki)
+* [Semantic MediaWiki](https://www.semantic-mediawiki.org/wiki/Semantic_MediaWiki) or [Bucket](https://github.com/weirdgloop/mediawiki-extensions-Bucket)
 
 **LocalSettings.php:**
 
 ```php
-$wgRSLookupTypes = [
+// SMW
+$wgRSLookupBackend = 'smw';
+$wgRSLookupSMWProps = [
     'item' => 'Item ID',
     'npc' => 'NPC ID',
     'object' => 'Object ID'
+];
+
+// Bucket
+$wgRSLookupBackend = 'bucket';
+$wgRSLookupBucketNames = [
+    'item' => 'item_id',
+    'npc' => 'npc_id',
+    'object' => 'object_id'
 ];
 ```
 

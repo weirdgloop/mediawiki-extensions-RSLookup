@@ -1,35 +1,48 @@
 {
-  "name": "RSLookup",
-  "version": "1.1.0",
-  "author": [
-    "[https://github.com/jayktaylor Jayden Bailey]",
-    "..."
-  ],
-  "url": "https://weirdgloop.org",
-  "descriptionmsg": "rslookup-desc",
-  "license-name": "GPL-2.0+",
-  "type": "semantic",
-  "MessagesDirs": {
-    "RSLookupMessages": [
-      "i18n/rslookup"
-    ]
-  },
-  "requires": {
-    "MediaWiki": ">= 1.30.0"
-  },
-  "config": {
-    "RSLookupTypes": {
-      "item": "Item ID",
-      "npc": "NPC ID",
-      "object": "Object ID",
-      "_merge_strategy": "array_plus"
-    }
-  },
-  "AutoloadClasses": {
-    "SpecialLookup": "SpecialLookup_body.php"
-  },
-  "SpecialPages": {
-    "Lookup": "SpecialLookup"
-  },
-  "manifest_version": 1
+	"name": "RSLookup",
+	"version": "1.2.0",
+	"author": [
+		"[https://github.com/jayktaylor Jayden Bailey]",
+		"..."
+	],
+	"url": "https://weirdgloop.org",
+	"descriptionmsg": "rslookup-desc",
+	"license-name": "GPL-2.0+",
+	"type": "semantic",
+	"MessagesDirs": {
+		"RSLookupMessages": [
+			"i18n/rslookup"
+		]
+	},
+	"requires": {
+		"MediaWiki": ">= 1.42.0"
+	},
+	"config": {
+		"RSLookupBackend": "smw",
+		"RSLookupSMWProps": {
+			"item": "Item ID",
+			"npc": "NPC ID",
+			"object": "Object ID",
+			"_merge_strategy": "array_plus"
+		},
+		"RSLookupBucketNames": {
+			"item": "item_id",
+			"npc": "npc_id",
+			"object": "object_id",
+			"_merge_strategy": "array_plus"
+		}
+	},
+	"AutoloadNamespaces": {
+		"MediaWiki\\Extension\\RSLookup\\": "includes/"
+	},
+	"SpecialPages": {
+		"Lookup": "MediaWiki\\Extension\\RSLookup\\SpecialLookup"
+	},
+	"ServiceWiringFiles": [
+		"includes/ServiceWiring.php"
+	],
+	"ExtensionMessagesFiles": {
+		"RSLookupAliases": "RSLookup.i18n.alias.php"
+	},
+	"manifest_version": 1
 }
