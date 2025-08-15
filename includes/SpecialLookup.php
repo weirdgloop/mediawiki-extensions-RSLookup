@@ -38,6 +38,7 @@ class SpecialLookup extends SpecialPage {
 		if ( empty( $this->lookupId ) ) {
 			// No ID given
 			$this->backupPlan();
+			return;
 		}
 
 		$url = $this->lookupService->performLookup(
