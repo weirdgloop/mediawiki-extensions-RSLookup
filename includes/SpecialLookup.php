@@ -44,7 +44,7 @@ class SpecialLookup extends SpecialPage {
 		$url = $this->lookupService->performLookup(
 			$this->getRequest(), $this->getUser(), $this->lookupType, $this->lookupId );
 		if ( !$url ) {
-			// No results from SMW, check if name provided is a wiki page
+			// No results from Bucket, check if name provided is a wiki page
 			wfDebugLog( 'rslookup',
 				"No valid URL to redirect to. [$this->lookupName, $this->lookupType, $this->lookupId]" );
 			$this->backupPlan();

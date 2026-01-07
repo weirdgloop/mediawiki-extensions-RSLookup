@@ -6,21 +6,11 @@ The RSLookup extension helps create integrations between the wiki and RuneScape 
 
 ### Requirements
 
-* [Semantic MediaWiki](https://www.semantic-mediawiki.org/wiki/Semantic_MediaWiki) or [Bucket](https://github.com/weirdgloop/mediawiki-extensions-Bucket)
+* [Bucket](https://github.com/weirdgloop/mediawiki-extensions-Bucket)
 
 **LocalSettings.php:**
 
 ```php
-// SMW
-$wgRSLookupBackend = 'smw';
-$wgRSLookupSMWProps = [
-    'item' => 'Item ID',
-    'npc' => 'NPC ID',
-    'object' => 'Object ID'
-];
-
-// Bucket
-$wgRSLookupBackend = 'bucket';
 $wgRSLookupBucketNames = [
     'item' => 'item_id',
     'npc' => 'npc_id',
@@ -32,7 +22,7 @@ $wgRSLookupBucketNames = [
 
 > This information is also found on the [Old School RuneScape Wiki](https://oldschool.runescape.wiki/w/RuneScape:Lookup)
 
-**Special:Lookup** is a page that redirects users to articles based on the ID provided. We currently support looking up items, NPCs/monsters, and objects. The special page takes advantage of IDs defined in infoboxes, and uses Semantic MediaWiki to query for pages with matching IDs. If the page includes a switch infobox, the pane with the right ID will be selected.
+**Special:Lookup** is a page that redirects users to articles based on the ID provided. We currently support looking up items, NPCs/monsters, and objects. The special page takes advantage of IDs defined in infoboxes, and uses Bucket to query for pages with matching IDs. If the page includes a switch infobox, the pane with the right ID will be selected.
 
 #### Parameters
 

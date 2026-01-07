@@ -8,7 +8,7 @@
 	"url": "https://weirdgloop.org",
 	"descriptionmsg": "rslookup-desc",
 	"license-name": "GPL-2.0+",
-	"type": "semantic",
+	"type": "other",
 	"MessagesDirs": {
 		"RSLookupMessages": [
 			"i18n/rslookup"
@@ -18,13 +18,6 @@
 		"MediaWiki": ">= 1.45.0"
 	},
 	"config": {
-		"RSLookupBackend": "smw",
-		"RSLookupSMWProps": {
-			"item": "Item ID",
-			"npc": "NPC ID",
-			"object": "Object ID",
-			"_merge_strategy": "array_plus"
-		},
 		"RSLookupBucketNames": {
 			"item": "item_id",
 			"npc": "npc_id",
