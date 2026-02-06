@@ -35,8 +35,8 @@ class SpecialLookup extends SpecialPage {
 		$this->lookupName = htmlspecialchars( $request->getText( 'name', '' ) );
 		$this->lookupDry = $request->getBool( 'dry', false );
 
-		if ( empty( $this->lookupId ) ) {
-			// No ID given
+		if ( empty( $this->lookupId ) || empty( $this->lookupType ) ) {
+			// No ID or type given
 			$this->backupPlan();
 			return;
 		}
