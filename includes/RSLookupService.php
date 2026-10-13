@@ -32,7 +32,7 @@ class RSLookupService {
 	 * @return string|null
 	 */
 	public function performLookup( $request, $user, $type, $id ) {
-		$propertyOrBucketName = $this->lookupTypes[$type];
+		$propertyOrBucketName = $this->lookupTypes[$type] ?? null;
 		if ( !$propertyOrBucketName ) {
 			return null;
 		}
