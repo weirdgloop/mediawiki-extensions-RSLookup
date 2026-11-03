@@ -3,10 +3,10 @@
 namespace MediaWiki\Extension\RSLookup;
 
 use MediaWiki\MediaWikiServices;
-use MediaWiki\SpecialPage\SpecialPage;
+use MediaWiki\SpecialPage\UnlistedSpecialPage;
 use MediaWiki\Title\Title;
 
-class SpecialLookup extends SpecialPage {
+class SpecialLookup extends UnlistedSpecialPage {
 	protected string $lookupType;
 
 	protected string $lookupId;
@@ -18,7 +18,7 @@ class SpecialLookup extends SpecialPage {
 	private RSLookupService $lookupService;
 
 	public function __construct() {
-		parent::__construct( 'Lookup', '', false );
+		parent::__construct( 'Lookup' );
 		$this->lookupService = MediaWikiServices::getInstance()->getService( 'RSLookupService' );
 	}
 
